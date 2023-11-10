@@ -21,30 +21,11 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Canvas canvas = new Canvas(WIDTH, HEIGHT);
-        //StackPane root = new StackPane(canvas);
-        //GraphicsContext g = canvas.getGraphicsContext2D();
-
-        ResizeableCanvas resizeableCanvas = new ResizeableCanvas(WIDTH, HEIGHT);
-        GraphicsContext g = resizeableCanvas.getGraphicsContext2D();
-
-        g.setFill(Color.YELLOW);
-        g.fillRect(
-                0,
-                0,
-                canvas.getWidth(),
-                canvas.getHeight());
-        g.setStroke(Color.RED);
-        g.strokeLine(10, 10 , 20, 20);
-
-        //Scene scene = new Scene(resizeableCanvas, WIDTH, HEIGHT);
-
         CanvasGrid canvasGrid = new CanvasGrid();
         canvasGrid.setup(WIDTH, HEIGHT, 25);
         StackPane root = new StackPane();
         canvasGrid.embed(v -> root.getChildren().add(v));
-        Scene scene = new Scene(resizeableCanvas, WIDTH, HEIGHT);
+        Scene scene = new Scene(root, WIDTH, HEIGHT);
 
         stage.setTitle("Hello!");
         stage.setScene(scene);
