@@ -1,7 +1,6 @@
 package puk.team.sandbox.javafxsandbox.grid;
 
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -13,21 +12,39 @@ public class CanvasGrid implements VisualGrid {
     private int height;
     private int unitSize;
     private ResizeableCanvas canvas;
-
+    private GraphicsContext g;
+    
     @Override
     public void setup(int width, int height, int unitSize) {
+        this.width = width;
+        this.height = height;
+        this.unitSize = unitSize;
         canvas = new ResizeableCanvas(width, height);
 
-        GraphicsContext g = canvas.getGraphicsContext2D();
-        g.setFill(Color.YELLOW);
-        g.fillRect(
-                0,
-                0,
-                canvas.getWidth(),
-                canvas.getHeight());
-        g.setStroke(Color.RED);
-        g.strokeLine(10, 10 , 20, 20);
+        g = canvas.getGraphicsContext2D();
 
+        drawBasicGrid();
+    }
+
+    private void drawBasicGrid() {
+        // background
+        g.setFill(Color.BLACK);
+        g.fillRect(0,0, this.width, this.height);
+
+        // lines
+        g.setStroke(Color.WHITE);
+        // vertical
+        for (int i = 0; i <= this.width; i+= this.unitSize) {
+            g.strokeLine(i, 0, i, this.height);
+        }
+        // horizontal
+        for (int i = 0; i <= height; i+= unitSize) {
+            g.strokeLine(0, i, width, i);
+        }
+        
+        // border
+        g.setStroke(Color.RED);
+        g.strokeRect(0,0, width, height);
     }
 
     @Override
