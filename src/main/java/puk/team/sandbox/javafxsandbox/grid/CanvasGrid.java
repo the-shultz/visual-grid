@@ -11,19 +11,19 @@ public class CanvasGrid implements VisualGrid {
     private int width;
     private int height;
     private int unitSize;
-    private ResizeableCanvas canvas;
     private GraphicsContext g;
     
     @Override
-    public void setup(int width, int height, int unitSize) {
+    public void setup(int width, int height, int unitSize, Consumer<Node> visualConsumer) {
         this.width = width;
         this.height = height;
         this.unitSize = unitSize;
-        canvas = new ResizeableCanvas(width, height);
+        ResizeableCanvas canvas = new ResizeableCanvas(width, height);
 
         g = canvas.getGraphicsContext2D();
 
         drawBasicGrid();
+        visualConsumer.accept(canvas);
     }
 
     private void drawBasicGrid() {
@@ -48,14 +48,27 @@ public class CanvasGrid implements VisualGrid {
     }
 
     @Override
-    public void embed(Consumer<Node> visualConsumer) {
-        visualConsumer.accept(canvas);
+    public void fillCoordinates(Color color, Coordinate... coordinates) {
+        for (Coordinate coordinate : coordinates) {
+            int xCord = (coordinate.x() - 1) * unitSize;
+            int yCord = (coordinate.y() - 1) * unitSize;
+
+            g.setFill(color);
+            g.fillRect(xCord, yCord, unitSize, unitSize);
+        }
     }
 
     @Override
-    public void fillCoordinates(Color color, Coordinate... coordinates) {
+    public void clearCoordinates(Coordinate... coordinates) {
+        for (Coordinate coordinate : coordinates) {
+            int xCord = (coordinate.x() - 1) * unitSize;
+            int yCord = (coordinate.y() - 1) * unitSize;
 
+            g.setFill(Color.BLACK);
+            g.fillRect(xCord, yCord, unitSize, unitSize);
+            g.setStroke(Color.WHITE);
+            g.strokeRect(xCord, yCord, unitSize, unitSize);
+        }
     }
-
 
 }

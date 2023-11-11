@@ -7,8 +7,11 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import puk.team.sandbox.javafxsandbox.grid.CanvasGrid;
+import puk.team.sandbox.javafxsandbox.grid.Coordinate;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class VisualGridApplication extends Application {
 
@@ -18,12 +21,20 @@ public class VisualGridApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         CanvasGrid canvasGrid = new CanvasGrid();
-        canvasGrid.setup(WIDTH, HEIGHT, 25);
         final StackPane root = new StackPane();
-        canvasGrid.embed(v -> {
+        canvasGrid.setup(WIDTH, HEIGHT, 25, v -> {
             root.getChildren().add(v);
         });
 
+        canvasGrid.fillCoordinates(Color.RED, new Coordinate(2, 2));
+        canvasGrid.fillCoordinates(Color.GREEN, new Coordinate(3, 3));
+        canvasGrid.fillCoordinates(Color.BLUE, new Coordinate(3, 4));
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                canvasGrid.clearCoordinates(new Coordinate(3, 4), new Coordinate(2, 2));
+            }
+        }, 3000);
         Scene scene = new Scene(root, WIDTH + 100, HEIGHT + 100);
 
         stage.setTitle("Hello!");
