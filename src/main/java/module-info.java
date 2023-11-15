@@ -4,6 +4,6 @@ module puk.team.sandbox.javafxsandbox {
 
     requires org.controlsfx.controls;
 
-    opens puk.team.sandbox.javafxsandbox to javafx.fxml;
+    opens puk.team.sandbox.javafxsandbox.main to javafx.fxml;
     exports puk.team.sandbox.javafxsandbox;
 }
