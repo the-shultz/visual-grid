@@ -34,6 +34,8 @@ public class VisualGridApplication extends Application {
         controller.setup(WIDTH, HEIGHT, UNIT_SIZE);
 
         Scene scene = new Scene(root, 1000, 1000);
+        stage.setMinHeight(700);
+        stage.setMinWidth(800);
         stage.setTitle("Visual Grid Sandbox !");
         stage.setScene(scene);
         stage.show();

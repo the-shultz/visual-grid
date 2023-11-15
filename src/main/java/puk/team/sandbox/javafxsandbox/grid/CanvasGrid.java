@@ -1,6 +1,7 @@
 package puk.team.sandbox.javafxsandbox.grid;
 
 import javafx.scene.Node;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -18,7 +19,7 @@ public class CanvasGrid implements VisualGrid {
         this.width = width;
         this.height = height;
         this.unitSize = unitSize;
-        ResizeableCanvas canvas = new ResizeableCanvas(width, height);
+        Canvas canvas = new Canvas(width, height);
 
         g = canvas.getGraphicsContext2D();
 
