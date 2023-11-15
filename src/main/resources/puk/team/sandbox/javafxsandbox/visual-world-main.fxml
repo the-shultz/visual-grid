@@ -5,27 +5,26 @@
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<SplitPane dividerPositions="0.8" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="533.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="puk.team.sandbox.javafxsandbox.main.VisualGridMainController">
-  <items>
-      <GridPane fx:id="gridPlaceholder" minHeight="300.0" minWidth="400.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="NEVER" minWidth="30.0" />
-            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" vgrow="NEVER" />
-          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-        </rowConstraints>
-      </GridPane>
-    <AnchorPane minHeight="200.0" minWidth="400.0" prefHeight="200.0" prefWidth="400.0">
+
+<GridPane fx:id="gridPlaceholder" minHeight="600.0" minWidth="400.0" prefHeight="652.0" prefWidth="755.0" vgap="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="puk.team.sandbox.javafxsandbox.main.VisualGridMainController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="NEVER" minWidth="30.0" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" vgrow="NEVER" />
+    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+      <RowConstraints vgrow="NEVER" />
+  </rowConstraints>
+   <children>
+    <AnchorPane minHeight="200.0" minWidth="400.0" prefHeight="200.0" prefWidth="400.0" GridPane.columnSpan="3" GridPane.rowIndex="3">
          <children>
             <GridPane hgap="5.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columnConstraints>
@@ -85,6 +84,7 @@
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clearCoordinateClicked" text="Clear !" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                </children>
             </GridPane>
-         </children></AnchorPane>
-  </items>
-</SplitPane>
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>
