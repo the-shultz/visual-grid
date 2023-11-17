@@ -7,6 +7,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.GridPane;
 import puk.team.sandbox.javafxsandbox.grid.CanvasGrid;
+import puk.team.sandbox.javafxsandbox.grid.Coordinate;
 
 public class VisualGridMainController {
 
@@ -34,12 +35,20 @@ public class VisualGridMainController {
 
     @FXML
     public void initialize() {
-        SpinnerValueFactory.IntegerSpinnerValueFactory rowsSpinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 50, 10, 1);
+        SpinnerValueFactory.IntegerSpinnerValueFactory rowsSpinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 10, 1);
         setupRowsSpinner.setValueFactory(rowsSpinnerValueFactory);
-        SpinnerValueFactory.IntegerSpinnerValueFactory columnsSpinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 50, 10, 1);
+        SpinnerValueFactory.IntegerSpinnerValueFactory columnsSpinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 10, 1);
         setupColumnsSpinner.setValueFactory(columnsSpinnerValueFactory);
         SpinnerValueFactory.IntegerSpinnerValueFactory stepSizeSpinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 75, 25, 5);
         setupUnitsizeSpinner.setValueFactory(stepSizeSpinnerValueFactory);
+
+        SpinnerValueFactory.IntegerSpinnerValueFactory coordinateRowsSpinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 10, 1);
+        coordinateRowsSpinnerValueFactory.maxProperty().bind(rowsSpinnerValueFactory.valueProperty());
+        coordinateRowSpinner.setValueFactory(coordinateRowsSpinnerValueFactory);
+        SpinnerValueFactory.IntegerSpinnerValueFactory coordinateColumnsSpinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 10, 1);
+        coordinateColumnsSpinnerValueFactory.maxProperty().bind(columnsSpinnerValueFactory.valueProperty());
+        coordinateColumnSpinner.setValueFactory(coordinateColumnsSpinnerValueFactory);
+
 
         canvasGrid = new CanvasGrid();
         rebuildGrid();
@@ -66,11 +75,11 @@ public class VisualGridMainController {
 
     @FXML
     void clearCoordinateClicked(ActionEvent event) {
-
+        canvasGrid.clearCoordinates(new Coordinate(coordinateRowSpinner.getValue(), coordinateColumnSpinner.getValue()));
     }
 
     @FXML
     void setCoordinateClicked(ActionEvent event) {
-
+        canvasGrid.fillCoordinates(coordinateColorPicker.getValue(), new Coordinate(coordinateRowSpinner.getValue(), coordinateColumnSpinner.getValue()));
     }
 }
