@@ -31,7 +31,7 @@ public class VisualGridApplication extends Application {
         loader.setLocation(resource);
         Parent root = loader.load();
         VisualGridMainController controller = loader.getController();
-        controller.setup(WIDTH, HEIGHT, UNIT_SIZE);
+        //controller.setup(WIDTH, HEIGHT, UNIT_SIZE);
 
         Scene scene = new Scene(root, 1000, 1000);
         stage.setMinHeight(700);

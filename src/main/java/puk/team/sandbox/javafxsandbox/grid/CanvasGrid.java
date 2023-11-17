@@ -13,18 +13,23 @@ public class CanvasGrid implements VisualGrid {
     private int height;
     private int unitSize;
     private GraphicsContext g;
-    
+    private Canvas canvas;
+
     @Override
     public void setup(int width, int height, int unitSize, Consumer<Node> visualConsumer) {
         this.width = width;
         this.height = height;
         this.unitSize = unitSize;
-        Canvas canvas = new Canvas(width, height);
+        canvas = new Canvas(width, height);
 
         g = canvas.getGraphicsContext2D();
 
         drawBasicGrid();
         visualConsumer.accept(canvas);
+    }
+
+    public Node getActualNode() {
+        return canvas;
     }
 
     private void drawBasicGrid() {
