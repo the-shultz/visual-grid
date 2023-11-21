@@ -2,10 +2,11 @@ package puk.team.sandbox.javafxsandbox.main;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
 import puk.team.sandbox.javafxsandbox.grid.CanvasGrid;
 import puk.team.sandbox.javafxsandbox.grid.Coordinate;
 
@@ -21,7 +22,7 @@ public class VisualGridMainController {
     private Spinner<Integer> coordinateRowSpinner;
 
     @FXML
-    private GridPane gridPlaceholder;
+    private AnchorPane visualLayoutContainer;
 
     @FXML
     private Spinner<Integer> setupColumnsSpinner;
@@ -35,11 +36,15 @@ public class VisualGridMainController {
 
     @FXML
     public void initialize() {
-        SpinnerValueFactory.IntegerSpinnerValueFactory rowsSpinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 10, 1);
+
+        visualLayoutContainer.setOnMousePressed(event -> visualLayoutContainer.setCursor(Cursor.CLOSED_HAND));
+        visualLayoutContainer.setOnMouseReleased(event -> visualLayoutContainer.setCursor(Cursor.DEFAULT));
+
+        SpinnerValueFactory.IntegerSpinnerValueFactory rowsSpinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 15, 1);
         setupRowsSpinner.setValueFactory(rowsSpinnerValueFactory);
-        SpinnerValueFactory.IntegerSpinnerValueFactory columnsSpinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 10, 1);
+        SpinnerValueFactory.IntegerSpinnerValueFactory columnsSpinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 15, 1);
         setupColumnsSpinner.setValueFactory(columnsSpinnerValueFactory);
-        SpinnerValueFactory.IntegerSpinnerValueFactory stepSizeSpinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 75, 25, 5);
+        SpinnerValueFactory.IntegerSpinnerValueFactory stepSizeSpinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 75, 50, 5);
         setupUnitsizeSpinner.setValueFactory(stepSizeSpinnerValueFactory);
 
         SpinnerValueFactory.IntegerSpinnerValueFactory coordinateRowsSpinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 10, 1);
@@ -64,11 +69,13 @@ public class VisualGridMainController {
         int newWidth = setupColumnsSpinner.getValue() * selectedUnitSize;
         int newHeight = setupRowsSpinner.getValue() * selectedUnitSize;
         // clear old grid, if such exists
-        gridPlaceholder.getChildren().remove(canvasGrid.getActualNode());
+        visualLayoutContainer.getChildren().clear();
 
         // place new grid node at the correct place
         canvasGrid.setup(newWidth, newHeight, selectedUnitSize, cg -> {
-            gridPlaceholder.add(cg, 1, 1);
+            AnchorPane.setLeftAnchor(cg, 5.0);
+            AnchorPane.setTopAnchor(cg, 5.0);
+            visualLayoutContainer.getChildren().add(cg);
         });
 
     }
